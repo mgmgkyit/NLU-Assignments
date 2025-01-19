@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Word Similarity Search between Word2Vec, Word2Vec Negative Sampling, Glove, and Gensim </title>
+    <style>
+        body {
+            font-family: Calibri, Arial, sans-serif;
+            margin: 20px;
+            background-color: #000;
+            color: #00FF00;
+        }
+        h1 {
+            text-align: center;
+            color: #00FF00; /* Changed to green */
+        }
+        form {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        input[type="text"] {
+            padding: 10px;
+            width: 300px;
+            border: 1px solid #00FF00;
+            border-radius: 5px;
+            background-color: #000;
+            color: #00FF00;
+        }
+        button {
+            padding: 10px 20px;
+            background-color: #00FF00; /* Changed to green */
+            color: #000;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #00CC00; /* Darker green for hover */
+        }
+        h2 {
+            color: #00FF00; /* Changed to green */
+            margin-top: 20px;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 20px;
+        }
+        table, th, td {
+            border: 1px solid #00FF00;
+        }
+        th, td {
+            padding: 12px;
+            text-align: left;
+        }
+        th {
+            background-color: #00FF00; /* Changed to green */
+            color: #000;
+        }
+        tr:nth-child(even) {
+            background-color: #333;
+        }
+        tr:hover {
+            background-color: #555;
+        }
+        .footer {
+            text-align: center;
+            margin-top: 40px;
+            font-size: 14px;
+            color: #777;
+        }
+        .results-container {
+            display: flex;
+            gap: 20px; /* Space between tables */
+        }
+        .results-container > div {
+            flex: 1; /* Each table container takes equal width */
+        }
+        .error-message {
+            color: red;
+            font-size: 14px;
+            margin-top: 10px;
+            display: none; /* Hidden by default */
+        }
+    </style>
+</head>
+<body>
+    <h1>Word Similarity Search between Word2Vec, Word2Vec Negative Sampling, Glove, and Gensim</h1> <!-- Changed title -->
+    <form method="post" onsubmit="return validateInput()">
+        <input type="text" name="search_query" id="search_query" placeholder="Enter your desired word to search" required>
+        <button type="submit">Search</button>
+        <div id="error-message" class="error-message">Please enter your desired word.</div>
+    </form>
+    
+    {% if search_query %}
+        <h2>Search Results for: {{ search_query }}</h2>
+
+        <div class="results-container">
+            <!-- Glove Results -->
+            <div>
+                <h3>Glove Results:</h3>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Rank</th>
+                            <th>Word</th>
+                            <th>Similarity Score</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for result in glove_output %}
+                            <tr>
+                                <td>{{ loop.index }}</td>
+                                <td>{{ result.split('. ')[1].split(' (')[0] }}</td>
+                                <td>{{ result.split('(')[1].split(')')[0] }}</td>
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+
+            <!-- Skipgram Results -->
+            <div>
+                <h3>Skipgram Results:</h3>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Rank</th>
+                            <th>Word</th>
+                            <th>Similarity Score</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for result in skipgram_output %}
+                            <tr>
+                                <td>{{ loop.index }}</td>
+                                <td>{{ result.split('. ')[1].split(' (')[0] }}</td>
+                                <td>{{ result.split('(')[1].split(')')[0] }}</td>
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+
+            <!-- Skipgram with Negative Sampling Results -->
+            <div>
+                <h3>Skipgram with Negative Sampling Results:</h3>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Rank</th>
+                            <th>Word</th>
+                            <th>Similarity Score</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for result in skipgram_neg_output %}
+                            <tr>
+                                <td>{{ loop.index }}</td>
+                                <td>{{ result.split('. ')[1].split(' (')[0] }}</td>
+                                <td>{{ result.split('(')[1].split(')')[0] }}</td>
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+
+            <!-- Gensim Results -->
+            <div>
+                <h3>Gensim Results:</h3>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Rank</th>
+                            <th>Word</th>
+                            <th>Similarity Score</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for result in gensim_output %}
+                            <tr>
+                                <td>{{ loop.index }}</td>
+                                <td>{{ result.split('. ')[1].split(' (')[0] }}</td>
+                                <td>{{ result.split('(')[1].split(')')[0] }}</td>
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    {% endif %}
+
+    <div class="footer">
+        <p>NLU Assignment : Assignment 01</p>
+    </div>
+
+    <script>
+        function validateInput() {
+            const input = document.getElementById('search_query').value.trim();
+            const errorMessage = document.getElementById('error-message');
+
+            // Check if the input contains more than one word
+            if (input.split(' ').length > 1) {
+                errorMessage.style.display = 'block'; // Show error message
+                return false; // Prevent form submission
+            } else {
+                errorMessage.style.display = 'none'; // Hide error message
+                return true; // Allow form submission
+            }
+        }
+    </script>
+</body>
+</html>
