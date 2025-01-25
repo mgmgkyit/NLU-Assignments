@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <title>Story Generator</title>
+        <style>
+            body {
+                font-family: Calibri, Arial, sans-serif;
+                margin: 0;
+                padding: 0;
+                background-color: #e8f5e9; /* Light green background */
+                color: #333;
+                display: flex;
+                flex-direction: column;
+                min-height: 100vh;
+            }
+            .container {
+                flex: 1;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                padding: 20px;
+            }
+            h1 {
+                text-align: center;
+                color: #2e7d32; /* Darker green for heading */
+                margin-bottom: 20px;
+            }
+            form {
+                background: white;
+                padding: 20px;
+                border-radius: 10px;
+                box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+                max-width: 500px;
+                width: 100%;
+            }
+            .form-group {
+                margin-bottom: 15px;
+            }
+            .form-group label {
+                display: block;
+                margin-bottom: 5px;
+                color: #2e7d32; /* Darker green for labels */
+                font-weight: bold;
+            }
+            .form-control {
+                width: 100%;
+                padding: 10px;
+                border: 1px solid #81c784; /* Light green border */
+                border-radius: 5px;
+                font-size: 16px;
+            }
+            .form-control:focus {
+                border-color: #2e7d32; /* Darker green on focus */
+                outline: none;
+            }
+            .btn-custom {
+                width: 100%;
+                padding: 10px;
+                background-color: #4caf50; /* Green button */
+                color: white;
+                border: none;
+                border-radius: 5px;
+                font-size: 16px;
+                cursor: pointer;
+                transition: background-color 0.3s ease;
+            }
+            .btn-custom:hover {
+                background-color: #2e7d32; /* Darker green on hover */
+            }
+            .generated-story {
+                background: white;
+                padding: 20px;
+                border-radius: 10px;
+                box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+                max-width: 800px;
+                width: 100%;
+                margin-top: 20px;
+            }
+            .generated-story h3 {
+                color: #2e7d32; /* Darker green for heading */
+                margin-bottom: 15px;
+            }
+            .generated-story p {
+                font-size: 18px;
+                line-height: 1.6;
+                color: #333;
+            }
+            .footer {
+                text-align: center;
+                padding: 10px;
+                background-color: #2e7d32; /* Darker green footer */
+                color: white;
+                font-size: 14px;
+                margin-top: auto;
+            }
+        </style>
+    </head>
+    
+<body>
+    <!-- Main Content -->
+    <div class="container">
+        <div>
+            <h1>James Bond Story Generator</h1>
+            <!-- User Instructions -->
+            <p class="text-center" style="color: #2e7d32;">
+                Enter a prompt to generate a James Bond story line.
+            </p>
+            <!-- User Input Form -->
+            <form id="data-form" action="/" method="post">
+                <div class="form-group">
+                    <label for="prompt">Enter your James Bond story prompt:</label>
+                    <input type="text" id="prompt" name="prompt" class="form-control" 
+                           value="{{ prompt }}" placeholder="e.g., He held out his hands..." required>
+                </div>
+                <div class="form-group">
+                    <label for="seq">Select a max word limit of the story line:</label>
+                    <select id="seq" name="seq" class="form-control" required>
+                        <option value="20">20</option>
+                        <option value="30">30</option>
+                        <option value="50">50</option>
+                        <option value="100">100</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="temperature">Select a creativity level:</label>
+                    <select id="temperature" name="temperature" class="form-control" required>
+                        <option value="1.0">Superfitted</option>
+                        <option value="0.85">Slightly fitted</option>
+                        <option value="0.7">Preplexed, more natural</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <button type="submit" class="btn-custom">Generate Story</button>
+                </div>
+            </form>
+            <!-- Generated Text -->
+            {% if sentence %}
+            <div class="generated-story">
+                <h3>Generated Story: {{ fitting }}, {{ words }} words long.</h3>
+                <p>{{ sentence }}</p>
+            </div>
+            {% endif %}
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div>
+            <p class="mb-0">Create your own James Bond Story Line using LSTM</p>
+        </div>
+    </footer>
+</body>
+</html>
