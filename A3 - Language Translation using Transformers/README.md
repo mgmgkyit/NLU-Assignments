@@ -1,5 +1,5 @@
 # Assignment A3 : Language Translator using Transformers
-# Here, I've experimented langage translation with deep learning
+# Here, I've experimented langage translation with Transformers
 Student ID: st125214
 
 # About this task
