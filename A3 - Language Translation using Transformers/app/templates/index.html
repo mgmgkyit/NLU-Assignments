@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>English to Myanmar Translator</title>
+  <!-- Include Bootstrap CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  <style>
+    html, body {
+      height: 100%;
+      margin: 0;
+      display: flex;
+      flex-direction: column;
+    }
+    .container {
+      flex: 1;
+    }
+    body {
+      background-color: #f4e7d1;
+      font-family: 'Courier New', Courier, monospace;
+      color: #4b3621;
+    }
+    .card {
+      background-color: #ffcc99;
+      border: 2px solid #d17b49;
+    }
+    .btn-primary {
+      background-color: #a0522d;
+      border-color: #8b4513;
+    }
+    .btn-primary:hover {
+      background-color: #8b4513;
+      border-color: #5a2e0d;
+    }
+    .border {
+      border-color: #d17b49 !important;
+    }
+    .footer {
+      text-align: center;
+      padding: 15px;
+      background-color: #d17b49;
+      color: white;
+      margin-top: auto;
+    }
+  </style>
+</head>
+<body>
+  <div class="container mt-5">
+    <div class="row">
+      <div class="col-md-8 offset-md-2">
+        <div class="card shadow-lg">
+          <div class="card-body">
+            <h2 class="card-title text-center mb-4">English to Myanmar Translator</h2>
+            <form method="post" action="/translate">
+              <div class="mb-3">
+                <label for="query" class="form-label fw-bold">English Text:</label>
+                <textarea class="form-control" id="query" name="query" rows="4" placeholder="Enter the original English text..." required>{{ old_query }}</textarea>
+              </div>
+              <button type="submit" class="btn btn-primary w-100" id="translate-btn">Translate</button>
+              <div id="loading" class="text-center mt-2" style="display: none;">
+                <div class="spinner-border text-primary" role="status">
+                  <span class="visually-hidden">Translating...</span>
+                </div>
+              </div>
+            </form>
+            <div class="mt-4">
+              <h3 class="fw-bold">Myanmar Text:</h3>
+              <div class="border p-3 rounded bg-light">
+                <p class="mb-0">{{ result }}</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <footer class="footer">
+    <p>English to Myanmar Translator - Powered by AI. Bringing accurate translations with a retro touch!</p>
+  </footer>
+
+  <!-- Include Bootstrap JS and Popper.js -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+  <script>
+    document.querySelector("form").addEventListener("submit", function() {
+      document.getElementById("translate-btn").disabled = true;
+      document.getElementById("loading").style.display = "block";
+    });
+  </script>
+</body>
+</html>
