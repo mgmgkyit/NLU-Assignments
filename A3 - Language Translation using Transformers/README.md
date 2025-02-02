@@ -52,8 +52,10 @@ I have to create a custom MM text tokenizer from PyICU Unicode Library.
 3. Attention Maps
 - Attention Map for General Attention is as below :
 ![General Attention](<General Attention map.png>)
-- Attention Maps for Additive Attention
+
+- Attention Maps for Additive Attention is as below :
 ![Additive Attention](<Additive Attention map.png>)
+
 - Attention Map for Multiplicative Attention is as below :
 ![Multiplicative Attention](<Multiplicative Attention map.png>)
 
