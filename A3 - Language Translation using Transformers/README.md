@@ -4,14 +4,16 @@ Student ID: st125214
 
 # About this task
 The intention of this task is to experiment on Transformers for langage translation.
-Deep learning techniques with layers arranged as below : 
-Encoder Layer -> Multihead Attention Layer -> Position-wise Feedforward Layer -> Decoder Layer
-are used in this technique.
-Three different attention mechanisms were experimented in this task, and the most effective attention
-mechanism was used to create a web application which tries to translate input language into another.
-For language translation transformers, huge amounts of parallel dual-language datasets were needed,
-along with the intensive GPU resources (GPU memory, parallel tensor cores, GPU time).
+
+In the training the layers are arranged as below : 
+Encoder Layer -> Multihead Attention Layer -> Position-wise Feedforward Layer -> Decoder Layer are used in this technique.
+
+Three different attention mechanisms were experimented in this task, and the most effective attention mechanism was used to create a web application which tries to translate input language into another.
+
+For language translation transformers, huge amounts of parallel dual-language datasets were needed, along with the intensive GPU resources (GPU memory, parallel tensor cores, GPU time).
+
 My experiment uses a limited size of parallel corpora, and was run on the single GPU with limited GPU RAM, and training parameters reduced, and therefore the results cannot be precise. It will be just to experiment and demonstrate the concept, not to be used in production.
+
 For practical use, we need to use larger text dataset, increase the training parameters, and deploy to use a decent GPU (multi-GPU parallel computing) with enough GPU RAM to get decent results.
 
 ===========================================
