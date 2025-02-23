@@ -46,7 +46,16 @@ def submit():
     # Simple example of result generation logic
     similarity = calculate_similarity(model, tokenizer, premise, hypothesis, device)
     similarity = round(similarity, 4)
-    return render_template('index.html', premise=premise, hypothesis=hypothesis, result=similarity)
+    
+    # Display classification result based on similarity score
+    if similarity > 0.7:
+        label = "Entailment"
+    elif similarity > 0.3:
+        label = "Neutral"
+    else:
+        label = "Contradiction"
+        
+    return render_template('index.html', premise=premise, hypothesis=hypothesis, result=label)
 
 if __name__ == '__main__':
     app.run(debug=True)
