@@ -87,7 +87,4 @@ from the command prompt, run : "python app/app.py"
 Access the app from http://127.0.0.1:5000
 
 ## Result Screenshots
-Sample results screenshots were also placed under the folder 'screens'.
-
-(<Screenshot 2025-02-23 165424.png>)
-(<Screenshot 2025-02-23 165453.png>)
+Sample results screenshots were also placed under the folder 'Screenshots'.
