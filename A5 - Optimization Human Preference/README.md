@@ -91,7 +91,7 @@ A simple web application was developed using Flask. The application provides an 
 
 ### Webapp Home page and Result
 - **Home Page**
-![Initial](screenshots/Initial_Screen.png)  
+![Initial](./screenshots/Initial_Screen.png)  
 
 - **Results**
 ![Result](screenshots/Answer_1.png)
