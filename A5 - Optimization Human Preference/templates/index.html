@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Text Generator</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #1b3d2f; /* Dark Green Background */
+            color: #d4edda; /* Light Green Text */
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            margin: 0;
+            padding-bottom: 50px; /* Space for footer */
+        }
+        .container {
+            width: 90%;
+            max-width: 1000px;
+            text-align: center;
+            background: rgba(0, 0, 0, 0.2);
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0px 0px 10px rgba(255, 255, 255, 0.2);
+        }
+        textarea {
+            width: 100%;
+            height: 70px;
+            background-color: #2a5a44; /* Darker Green */
+            color: #ffffff;
+            border: 1px solid #76b29d;
+            padding: 10px;
+            border-radius: 5px;
+            resize: none;
+            font-size: 16px;
+        }
+        button {
+            margin-top: 10px;
+            padding: 12px 20px;
+            background-color: #4caf50; /* Green Button */
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            width: 100%;
+        }
+        button:hover {
+            background-color: #367c39;
+        }
+        #output {
+            margin-top: 20px;
+            border: 1px solid #76b29d;
+            padding: 10px;
+            width: 100%;
+            background-color: #2a5a44;
+            color: #ffffff;
+            text-align: left;
+            white-space: pre-wrap;
+            word-wrap: break-word;
+            min-height: 50px;
+            border-radius: 5px;
+        }
+        .button-bar {
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+            background-color: #ffcc00; /* Highlighted Yellow */
+            color: #333;
+            padding: 10px;
+            text-align: center;
+            font-size: 14px;
+            font-weight: bold;
+            box-shadow: 0px -2px 5px rgba(0, 0, 0, 0.3);
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>AI Text Generator</h1>
+        <h2>Using Optimized Fine-tuned Human Preferences</h2>
+        <textarea id="prompt" placeholder="Enter your prompt here..."></textarea><br>
+        <button onclick="generateText()">Generate</button>
+        <div id="output"></div>
+    </div>
+
+    <div class="button-bar">
+        <span id="datetime"></span> | &copy; 2025 AI Text Generator, fine-tunned from The Qwen2-0.5B-Instruct model,  mgmgkyit@HuggingFace
+    </div>
+
+    <script>
+        let interval;
+
+        function showThinkingAnimation() {
+            let dots = "";
+            interval = setInterval(() => {
+                dots += ".";
+                if (dots.length > 7) dots = "";
+                document.getElementById("output").innerText = "Thinking" + dots;
+            }, 500);
+        }
+
+        async function generateText() {
+            const prompt = document.getElementById("prompt").value;
+            const outputDiv = document.getElementById("output");
+
+            // Show "Thinking..." animation
+            outputDiv.innerText = "Thinking";
+            showThinkingAnimation();
+
+            try {
+                const response = await fetch("/generate", {
+                    method: "POST",
+                    headers: { "Content-Type": "application/json" },
+                    body: JSON.stringify({ prompt: prompt })
+                });
+
+                const result = await response.json();
+                clearInterval(interval); // Stop animation
+                outputDiv.innerText = result.response || "Error generating response";
+            } catch (error) {
+                clearInterval(interval);
+                outputDiv.innerText = "Error generating response";
+            }
+        }
+
+        function updateDateTime() {
+            const now = new Date();
+            document.getElementById("datetime").innerText = now.toLocaleString();
+        }
+
+        setInterval(updateDateTime, 1000); // Update time every second
+        updateDateTime(); // Initialize time on page load
+    </script>
+</body>
+</html>
