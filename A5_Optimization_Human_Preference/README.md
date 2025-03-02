@@ -64,7 +64,7 @@ beta is the temperature parameter that controls how strongly the preference sign
      A loop over various hyperparameters (learning rate, batch size, number of epochs, and beta) was implemented to find the best training configuration.
 
 - **Model Training Results**
-![Training](screenshots/Model_training.png)
+![Training](screenshots/model_training.png)
 ---
 
 ## Task 3 – Saving and Pushing the Model
@@ -92,12 +92,12 @@ A simple web application was developed using Flask. The application provides an 
 
 ### Webapp Home page and Result
 - **Home Page**
-![Initial](./screenshots/Initial_Screen.png)  
+![Initial](./screenshots/initial_screen.png)  
 
 - **Results**
-![Result](screenshots/Answer_1.png)
-![Result](screenshots/Answer_2.png)
-![Result](screenshots/Answer_3.png)
+![Result](./screenshots/answer_1.png)
+![Result](./screenshots/answer_2.png)
+![Result](./screenshots/answer_3.png)
 
 - **Key Features:**
   - **Input:** A text box for entering a prompt.
