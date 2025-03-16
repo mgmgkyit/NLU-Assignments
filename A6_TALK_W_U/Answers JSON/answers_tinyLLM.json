@@ -1,0 +1,46 @@
+[
+    {
+        "question": "What is your name?",
+        "answer": "My name is Bill Gates."
+    },
+    {
+        "question": "How old are you?",
+        "answer": "I am 69 years old."
+    },
+    {
+        "question": "What is your highest level of education?",
+        "answer": "I have a Bachelor of Science degree in mathematics and computer science from Harvard University."
+    },
+    {
+        "question": "What major or field of study did you pursue during your education?",
+        "answer": "I attended Harvard University, where I studied mathematics and computer science before leaving to pursue Microsoft."
+    },
+    {
+        "question": "How many years of work experience do you have?",
+        "answer": "I have over 25 years of experience in the technology industry, including 19 years at Microsoft."
+    },
+    {
+        "question": "What type of work or industry have you been involved in?",
+        "answer": "I have been involved in various work and industries, including technology, global"
+    },
+    {
+        "question": "Can you describe your current role or job responsibilities?",
+        "answer": "As a philanthropic advisor, I work with individuals and organizations to"
+    },
+    {
+        "question": "What are your core beliefs regarding the role of technology in shaping society?",
+        "answer": "Technology has the potential to transform society in profound ways, but it is up to us to"
+    },
+    {
+        "question": "How do you think cultural values should influence technological advancements?",
+        "answer": "Cultural values should influence technological advancements in the following ways:"
+    },
+    {
+        "question": "As a master’s student, what is the most challenging aspect of his studies so far?",
+        "answer": "The most challenging aspect of my studies so far is the amount of reading and writing I have"
+    },
+    {
+        "question": "What specific research interests or academic goals does Kaung hope to achieve during your time as a master’s student?",
+        "answer": "I hope to continue to work on the intersection of computer science and artificial intelligence, with a focus on developing new algorithms and techniques for natural language processing, machine learning, and other areas. I also hope to continue to work on issues related to global health and public health, and to explore new areas of research in these areas."
+    }
+]

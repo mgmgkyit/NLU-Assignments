@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Chatbot App</title>
+  <style>
+    body {
+      background-color: #000;
+      color: #d4af37; /* Gold */
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+    }
+    /* Center container with 25% margins on left/right */
+    .container {
+      width: 50%;
+      margin: 50px auto;
+      text-align: center;
+    }
+    /* Styling for input and output boxes */
+    .input-box, .output-box {
+      width: 100%;
+      padding: 10px;
+      margin: 10px 0;
+      background-color: #222;
+      border: 2px solid #d4af37;
+      border-radius: 5px;
+      color: #d4af37;
+      box-sizing: border-box;
+    }
+    .input-box {
+      height: 40px;
+    }
+    .output-box {
+      min-height: 300px;
+    }
+    .button {
+      padding: 10px 20px;
+      background-color: #d4af37;
+      color: #000;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+    .button:hover {
+      background-color: #b5891e;
+    }
+    /* Bottom bar fixed at the bottom of the screen */
+    #bottom-bar {
+      position: fixed;
+      bottom: 0;
+      width: 100%;
+      background-color: #222;
+      color: #d4af37;
+      text-align: center;
+      padding: 10px 0;
+    }
+    /* Hidden by default; shown while waiting for the response */
+    #thinking {
+      font-style: italic;
+      display: none;
+      margin-top: 10px;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Let's Talk : An Interactive Chatbot</h1>
+    <h2>Based on Practical applications of RAG (Retrieval-Augmented Generation)</h2>
+    <input type="text" id="userInput" class="input-box" placeholder="Enter your question here...">
+    <br>
+    <button id="submitBtn" class="button">Submit</button>
+    <div id="thinking">Thinking</div>
+    <div id="output" class="output-box"></div>
+  </div>
+  
+  <div id="bottom-bar">
+    <span id="time"></span> | RAG Chatbot App v1.0,        2025          https://github.com/mgmgkyit
+  </div>
+  
+  <script>
+    // Update time every second in the bottom bar
+    function updateTime() {
+      var now = new Date();
+      document.getElementById('time').textContent = now.toLocaleTimeString();
+    }
+    setInterval(updateTime, 1000);
+    updateTime();
+    
+    var thinkingInterval;
+    // Start animated "Thinking..." text
+    function startThinkingAnimation() {
+      var dotCount = 0;
+      var thinkingEl = document.getElementById('thinking');
+      thinkingEl.style.display = 'block';
+      thinkingEl.textContent = "Thinking";
+      thinkingInterval = setInterval(function(){
+        dotCount = (dotCount + 1) % 4;
+        var dots = '.'.repeat(dotCount);
+        thinkingEl.textContent = "Thinking" + dots;
+      }, 500);
+    }
+    
+    // Stop animated "Thinking..." text
+    function stopThinkingAnimation() {
+      clearInterval(thinkingInterval);
+      document.getElementById('thinking').style.display = 'none';
+    }
+    
+    // Submit query and fetch answer from the server
+    document.getElementById('submitBtn').addEventListener('click', function(){
+      var userInput = document.getElementById('userInput').value;
+      if (!userInput) return;
+      
+      document.getElementById('output').textContent = "";
+      startThinkingAnimation();
+      
+      fetch('/ask', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ question: userInput })
+      })
+      .then(response => response.json())
+      .then(data => {
+        stopThinkingAnimation();
+        document.getElementById('output').innerHTML = '<strong>Answer:</strong> ' + data.answer;
+      })
+      .catch(error => {
+        stopThinkingAnimation();
+        document.getElementById('output').textContent = "Error: " + error;
+      });
+    });
+  </script>
+</body>
+</html>
