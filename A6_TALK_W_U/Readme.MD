@@ -53,6 +53,7 @@ The below models were explored in this task.
     - source : 'https://huggingface.co/hkunlp/instructor-base'
 
 (b) Generator Models :
+
     1. TinyLLama        : TinyLlama/TinyLlama-1.1B-Chat-v1.0
         Source          : 'https://huggingface.co/TinyLlama/TinyLlama-1.1B-Chat-v1.0'
         Model Size      : 1.1B params
